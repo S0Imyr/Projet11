@@ -1,5 +1,6 @@
 bin
 include
+env
 lib
 .Python
 tests/
