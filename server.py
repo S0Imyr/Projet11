@@ -49,13 +49,18 @@ def book(competition_id, club_id):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
-    
-    competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-    club = [c for c in clubs if c['name'] == request.form['club']][0]
+    found_club = None
+    found_competition = None
+    for club in clubs:
+        if club['id'] == int(request.form['club']):
+            found_club = club
+    for competition in competitions:
+        if competition['id'] == int(request.form['competition']):
+            found_competition = competition
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+    found_competition['numberOfPlaces'] = int(found_competition['numberOfPlaces']) - placesRequired
     flash('Great-booking complete!')
-    return render_template('welcome.html', club=club, competitions=competitions)
+    return render_template('welcome.html', club=found_club, competitions=competitions)
 
 
 # TODO: Add route for points display
