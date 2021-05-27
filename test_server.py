@@ -4,29 +4,35 @@ from server import app
 
 test_clubs = [
         {
-            "name":"Simply Lift",
-            "email":"john@simplylift.co",
-            "points":"13"
+            "id": 1,
+            "name": "Simply Lift",
+            "email": "john@simplylift.co",
+            "points": "13"
         },
         {
-            "name":"Iron Temple",
+            "id": 2,
+            "name": "Iron Temple",
             "email": "admin@irontemple.com",
-            "points":"4"
+            "points": "4"
         },
-        {   "name":"She Lifts",
+        {   
+            "id": 3,
+            "name": "She Lifts",
             "email": "kate@shelifts.co.uk",
-            "points":"12"
+            "points": "12"
         }
     ]
 
 
 test_competitions = [
         {
+            "id": 1,
             "name": "Spring Festival",
             "date": "2021-08-27 10:00:00",
             "numberOfPlaces": "25"
         },
         {
+            "id": 2,
             "name": "Fall Classic",
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "13"
