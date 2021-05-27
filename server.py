@@ -2,23 +2,39 @@ import json
 from flask import Flask, render_template, request, redirect, flash,url_for
 
 
-def loadClubs():
-    with open('clubs.json') as clubs:
-         listOfClubs = json.load(clubs)['clubs']
-         return listOfClubs
+def load_clubs():
+    with open('clubs.json') as clubs_file:
+        clubs = json.load(clubs_file)['clubs']
+        return clubs
 
 
-def loadCompetitions():
-    with open('competitions.json') as competitions:
-         listOfCompetitions = json.load(competitions)['competitions']
-         return listOfCompetitions
+def load_competitions():
+    with open('competitions.json') as competitions_file:
+        competitions = json.load(competitions_file)['competitions']
+        return competitions
+
+
+def get_club(club_id, clubs):
+    found_club = None
+    for club in clubs:
+        if club['id'] == club_id:
+            found_club = club
+    return found_club
+
+
+def get_competition(competition_id, competitions):
+    found_competition = None
+    for competition in competitions:
+        if competition['id'] == competition_id:
+            found_competition = competition
+    return found_competition
 
 
 app = Flask(__name__)
 app.secret_key = 'something_special'
 
-competitions = loadCompetitions()
-clubs = loadClubs()
+competitions = load_competitions()
+clubs = load_clubs()
 
 @app.route('/')
 def index():
@@ -32,14 +48,8 @@ def showSummary():
 
 @app.route('/book/<int:competition_id>/<int:club_id>')
 def book(competition_id, club_id):
-    found_club = None
-    found_competition = None
-    for club in clubs:
-        if club['id'] == club_id:
-            found_club = club
-    for competition in competitions:
-        if competition['id'] == competition_id:
-            found_competition = competition
+    found_club = get_club(club_id, clubs)
+    found_competition = get_competition(competition_id, competitions)
     if found_club and found_competition:
         return render_template('booking.html', club=found_club, competition=found_competition)
     else:
@@ -49,16 +59,10 @@ def book(competition_id, club_id):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
-    found_club = None
-    found_competition = None
-    for club in clubs:
-        if club['id'] == int(request.form['club']):
-            found_club = club
-    for competition in competitions:
-        if competition['id'] == int(request.form['competition']):
-            found_competition = competition
-    placesRequired = int(request.form['places'])
-    found_competition['numberOfPlaces'] = int(found_competition['numberOfPlaces']) - placesRequired
+    found_club = get_club(int(request.form['club']), clubs)
+    found_competition = get_competition(int(request.form['competition']), competitions)
+    placesRequested = int(request.form['places'])
+    found_competition['numberOfPlaces'] = int(found_competition['numberOfPlaces']) - placesRequested
     flash('Great-booking complete!')
     return render_template('welcome.html', club=found_club, competitions=competitions)
 
