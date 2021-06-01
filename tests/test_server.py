@@ -20,7 +20,15 @@ class Test:
         response = self.test_client.post('/showSummary', data=dict(email=email))
         assert response.status_code == status
     
-    @pytest.mark.parametrize("club_id, competition_id, number_of_places, club_points, competition_places, messages", [((1, 1, 14, 13, 25, ["<li>You don&#39;t have enough points. Try with a number smaller than your total points.</li>"])), (1, 1, 11, 2, 14, ["<li>Great-booking complete!</li>"]), (3, 3, 10, 12, 8, ["There are not enough places in this competition. Try with a smaller number of seats than the available seats."])])
+    @pytest.mark.parametrize("club_id, competition_id, "
+                            "number_of_places, club_points, "
+                            "competition_places, messages",
+                            [
+                             (3, 3, 10, 12, 8, ['There are not enough places in this competition. Try with a smaller number of seats than the available seats.']), 
+                             ((2, 2, 5, 4, 13, ['You don&#39;t have enough points. Try with a number smaller than your total points.'])), 
+                             ((1, 1, 14, 13, 25, ['You can&#39;t book more than 12 places in a competition.'])), 
+                             (1, 1, 11, 2, 14, ['Great-booking complete!'])
+                            ])
     def test_booking(self, club_id, competition_id, number_of_places, club_points, competition_places, messages):
         response = self.test_client.post('/purchasePlaces', data=dict(club=club_id, competition=competition_id, places=number_of_places))
         assert response.status_code == 200
