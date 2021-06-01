@@ -4,8 +4,8 @@ import pytest
 
 class Test:
     def setup_method(self):
-        self.clubs = load_clubs("tests/clubs.json")
-        self.competitions = load_competitions("tests/competitions.json")
+        self.clubs = load_clubs()
+        self.competitions = load_competitions()
         self.test_client = app.test_client()
 
     def teardown_method(self):
