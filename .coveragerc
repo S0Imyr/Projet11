@@ -6,4 +6,4 @@ omit =
 
 
 [html]
-directory = coverage_html_report
+directory = coverage_report

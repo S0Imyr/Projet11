@@ -1,5 +1,3 @@
-env
-
 bin
 include
 env
@@ -7,3 +5,7 @@ lib
 .Python
 .envrc
 __pycache__
+
+.pytest_cache
+
+coverage_report
