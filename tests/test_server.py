@@ -50,3 +50,7 @@ class Test:
         assert str.encode(page) in response.data
         for message in messages:
             assert str.encode(message) in response.data
+
+    def test_logout(self):
+        response = self.test_client.get("/logout")
+        assert response.status_code == 302
