@@ -5,6 +5,5 @@ include
 env
 lib
 .Python
-tests/
 .envrc
 __pycache__

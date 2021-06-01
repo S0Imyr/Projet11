@@ -2,14 +2,14 @@ import json
 from flask import Flask, render_template, request, redirect, flash,url_for
 
 
-def load_clubs():
-    with open('clubs.json') as clubs_file:
+def load_clubs(file='clubs.json'):
+    with open(file) as clubs_file:
         clubs = json.load(clubs_file)['clubs']
         return clubs
 
 
-def load_competitions():
-    with open('competitions.json') as competitions_file:
+def load_competitions(file='competitions.json'):
+    with open(file) as competitions_file:
         competitions = json.load(competitions_file)['competitions']
         return competitions
 
