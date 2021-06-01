@@ -17,7 +17,7 @@ class Test:
 
     @pytest.mark.parametrize("email, status", [("admin@irontemple.com", 200), ("admin@iroemple.com", 403)])
     def test_input_email(self, email, status):
-        response = self.test_client.post('/showSummary', data=dict(email=email))
+        response = self.test_client.post('/show_summary', data=dict(email=email))
         assert response.status_code == status
     
     @pytest.mark.parametrize("club_id, competition_id, "
@@ -30,7 +30,7 @@ class Test:
                              (1, 1, 11, 2, 14, ['Great-booking complete!'])
                             ])
     def test_purchase_places(self, club_id, competition_id, number_of_places, club_points, competition_places, messages):
-        response = self.test_client.post('/purchasePlaces', data=dict(club=club_id, competition=competition_id, places=number_of_places))
+        response = self.test_client.post('/purchase_places', data=dict(club=club_id, competition=competition_id, places=number_of_places))
         assert response.status_code == 200
         assert str.encode(f"Points available: {club_points}") in response.data
         assert str.encode(f"Number of Places: {competition_places}") in response.data

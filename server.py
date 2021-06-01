@@ -41,8 +41,8 @@ clubs = load_clubs()
 def index():
     return render_template('index.html')
 
-@app.route('/showSummary', methods=['POST'])
-def showSummary():
+@app.route('/show_summary', methods=['POST'])
+def show_summary():
     email = request.form['email']
     for competition in competitions:
         competition["active"] = datetime.fromisoformat(competition['date']) + timedelta(days=1) > datetime.now()
@@ -67,7 +67,7 @@ def book(competition_id, club_id):
         return render_template('welcome.html', club={"id": 0}, competitions=competitions)
 
 
-@app.route('/purchasePlaces', methods=['POST'])
+@app.route('/purchase_places', methods=['POST'])
 def purchase_places():
     club = get_club(int(request.form['club']), clubs)
     competition = get_competition(int(request.form['competition']), competitions)
@@ -88,7 +88,9 @@ def purchase_places():
         return render_template('welcome.html', club=club, competitions=competitions)
 
 
-# TODO: Add route for points display
+@app.route('/board', methods=['GET'])
+def board():
+    return render_template('board.html', clubs=clubs)
 
 
 @app.route('/logout')
