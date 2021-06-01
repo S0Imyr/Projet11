@@ -62,7 +62,7 @@ def book(competition_id, club_id):
 
 
 @app.route('/purchasePlaces', methods=['POST'])
-def purchasePlaces():
+def purchase_places():
     club = get_club(int(request.form['club']), clubs)
     competition = get_competition(int(request.form['competition']), competitions)
     placesRequested = int(request.form['places'])

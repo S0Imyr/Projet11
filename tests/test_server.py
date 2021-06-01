@@ -29,10 +29,17 @@ class Test:
                              ((1, 1, 14, 13, 25, ['You can&#39;t book more than 12 places in a competition.'])), 
                              (1, 1, 11, 2, 14, ['Great-booking complete!'])
                             ])
-    def test_booking(self, club_id, competition_id, number_of_places, club_points, competition_places, messages):
+    def test_purchase_places(self, club_id, competition_id, number_of_places, club_points, competition_places, messages):
         response = self.test_client.post('/purchasePlaces', data=dict(club=club_id, competition=competition_id, places=number_of_places))
         assert response.status_code == 200
         assert str.encode(f"Points available: {club_points}") in response.data
         assert str.encode(f"Number of Places: {competition_places}") in response.data
+        for message in messages:
+            assert str.encode(message) in response.data
+
+    @pytest.mark.parametrize("club_id, competition_id, messages", [(1, 1, ["This competition is over, you can't book any place."]), (3, 3, ["How many places ?"])])
+    def test_book(self, club_id, competition_id, messages):
+        response = self.test_client.get(f'/book/{club_id}/{competition_id}', content_type='html/text')
+        assert response.status_code == 200
         for message in messages:
             assert str.encode(message) in response.data
