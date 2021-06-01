@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 from flask import Flask, render_template, request, redirect, flash,url_for
 
 
@@ -43,6 +44,8 @@ def index():
 @app.route('/showSummary', methods=['POST'])
 def showSummary():
     email = request.form['email']
+    for competition in competitions:
+        competition["active"] = datetime.fromisoformat(competition['date']) + timedelta(days=1) > datetime.now()
     for club in clubs:
         if club['email'] == email:
             return render_template('welcome.html', club=club, competitions=competitions)
@@ -55,9 +58,12 @@ def book(competition_id, club_id):
     found_club = get_club(club_id, clubs)
     found_competition = get_competition(competition_id, competitions)
     if found_club and found_competition:
+        if datetime.fromisoformat(found_competition['date']) < datetime.now() + timedelta(days=1):
+            flash("This competition is over, you can't book any place.")
+            return render_template('welcome.html', club=found_club, competitions=competitions)
         return render_template('booking.html', club=found_club, competition=found_competition)
     else:
-        flash("Something went wrong-please try again")
+        flash("Competition or club not found.")
         return render_template('welcome.html', club=found_club, competitions=competitions)
 
 
