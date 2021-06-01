@@ -37,9 +37,16 @@ class Test:
         for message in messages:
             assert str.encode(message) in response.data
 
-    @pytest.mark.parametrize("club_id, competition_id, messages", [(1, 1, ["This competition is over, you can't book any place."]), (3, 3, ["How many places ?"])])
-    def test_book(self, club_id, competition_id, messages):
-        response = self.test_client.get(f'/book/{club_id}/{competition_id}', content_type='html/text')
+    @pytest.mark.parametrize("club_id, competition_id, page, messages", 
+                             [
+                              (1, 1, "Summary | GUDLFT Registration", ["This competition is over, you can&#39;t book any place."]), 
+                              (3, 3, "Booking for", ["How many places ?"]),
+                              (3, 4, "Summary | GUDLFT Registration", ["Competition or club not found."]), 
+                              (4, 3, "Summary | GUDLFT Registration", ["Competition or club not found."])
+                             ])
+    def test_book(self, club_id, competition_id, page, messages):
+        response = self.test_client.get(f'/book/{competition_id}/{club_id}', content_type='html/text')
         assert response.status_code == 200
+        assert str.encode(page) in response.data
         for message in messages:
             assert str.encode(message) in response.data

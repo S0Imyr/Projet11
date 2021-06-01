@@ -64,7 +64,7 @@ def book(competition_id, club_id):
         return render_template('booking.html', club=found_club, competition=found_competition)
     else:
         flash("Competition or club not found.")
-        return render_template('welcome.html', club=found_club, competitions=competitions)
+        return render_template('welcome.html', club={"id": 0}, competitions=competitions)
 
 
 @app.route('/purchasePlaces', methods=['POST'])
