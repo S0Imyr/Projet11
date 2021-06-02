@@ -1,9 +1,0 @@
-[run]
-
-omit =
-    env/*
-    tests/*
-
-
-[html]
-directory = coverage_report
