@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from flask import Flask, render_template, request, redirect, flash,url_for
 
 
+PLACE_COST = 3
+MAXIMUM_PLACE_BOOK_IN_COMPETITION = 12
+
 def load_clubs(file='clubs.json'):
     with open(file) as clubs_file:
         clubs = json.load(clubs_file)['clubs']
@@ -72,17 +75,18 @@ def purchase_places():
     club = get_club(int(request.form['club']), clubs)
     competition = get_competition(int(request.form['competition']), competitions)
     placesRequested = int(request.form['places'])
-    if placesRequested > 12:
-        flash("You can't book more than 12 places in a competition.")
+    points_requested = PLACE_COST * placesRequested
+    if placesRequested > MAXIMUM_PLACE_BOOK_IN_COMPETITION:
+        flash("You can't book more than {MAXIMUM_PLACE_BOOK_IN_COMPETITION} places in a competition.")
         return render_template('welcome.html', club=club, competitions=competitions)
     else:
-        if placesRequested > int(club['points']):
+        if points_requested > int(club['points']):
             flash("You don't have enough points. Try with a number smaller than your total points.")
             return render_template('welcome.html', club=club, competitions=competitions)
         elif placesRequested > int(competition['numberOfPlaces']):
             flash("There are not enough places in this competition. Try with a smaller number of seats than the available seats.")
             return render_template('welcome.html', club=club, competitions=competitions)
-        club['points'] = int(club['points']) - placesRequested
+        club['points'] = int(club['points']) - points_requested
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequested
         flash('Great-booking complete!')
         return render_template('welcome.html', club=club, competitions=competitions)
