@@ -14,9 +14,9 @@
         },
         {
             "id": 3,
-            "name": "Test Classic",
+            "name": "Test not enough places",
             "date": "2100-10-22 13:30:00",
-            "numberOfPlaces": "8"
+            "numberOfPlaces": "1"
         }
     ]
 }
