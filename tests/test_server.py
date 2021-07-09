@@ -54,3 +54,7 @@ class Test:
     def test_logout(self):
         response = self.test_client.get("/logout")
         assert response.status_code == 302
+
+    def test_board(self):
+        response = self.test_client.get("/board")
+        assert response.status_code == 200
