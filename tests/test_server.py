@@ -1,4 +1,4 @@
-from server import app, load_clubs, load_competitions, get_club, get_competition
+from server import app, load_clubs, load_competitions, MAXIMUM_PLACE_BOOK_IN_COMPETITION
 import pytest
 
 
@@ -24,10 +24,10 @@ class Test:
                             "number_of_places, club_points, "
                             "competition_places, messages",
                             [
-                             (3, 3, 10, 12, 8, ['There are not enough places in this competition. Try with a smaller number of seats than the available seats.']), 
+                             (3, 3, 2, 12, 1, ['There are not enough places in this competition. Try with a smaller number of seats than the available seats.']), 
                              ((2, 2, 5, 4, 13, ['You don&#39;t have enough points. Try with a number smaller than your total points.'])), 
-                             ((1, 1, 14, 13, 25, ['You can&#39;t book more than 12 places in a competition.'])), 
-                             (1, 1, 11, 2, 14, ['Great-booking complete!'])
+                             ((1, 1, 14, 13, 25, [f'You can&#39;t book more than {MAXIMUM_PLACE_BOOK_IN_COMPETITION} places in a competition.'])), 
+                             (1, 1, 4, 1, 21, ['Great-booking complete!'])
                             ])
     def test_purchase_places(self, club_id, competition_id, number_of_places, club_points, competition_places, messages):
         response = self.test_client.post('/purchase_places', data=dict(club=club_id, competition=competition_id, places=number_of_places))

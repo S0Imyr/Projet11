@@ -77,7 +77,7 @@ def purchase_places():
     placesRequested = int(request.form['places'])
     points_requested = PLACE_COST * placesRequested
     if placesRequested > MAXIMUM_PLACE_BOOK_IN_COMPETITION:
-        flash("You can't book more than {MAXIMUM_PLACE_BOOK_IN_COMPETITION} places in a competition.")
+        flash(f"You can't book more than {MAXIMUM_PLACE_BOOK_IN_COMPETITION} places in a competition.")
         return render_template('welcome.html', club=club, competitions=competitions)
     else:
         if points_requested > int(club['points']):
