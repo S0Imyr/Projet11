@@ -3,13 +3,16 @@ from locust import HttpUser, task, between
 class PerfUser(HttpUser):
     wait_time = between(1, 2.5)
 
+    def on_start(self):
+        self.client.get("/")
+        self.client.post("/show_summary", {"email": "john@simplylift.co"})
+
+    def on_stop(self):
+        self.client.get("/logout")
+
     @task
     def index(self):
         self.client.get("/")
-
-    @task
-    def show_summary(self):
-        self.client.post('/show_summary',  data={"email": "admin@irontemple.com"})
 
     @task
     def book(self):
@@ -18,16 +21,12 @@ class PerfUser(HttpUser):
         self.client.get(f"/book/{competition_id}/{club_id}")
 
     @task
-    def purchasePlaces(self):
+    def purchase_places(self):
         competition = 2
         club = 1
-        places = "22"
-        self.client.post("/purchasePlaces", data={ "competition": competition, "club": club, "places": places })
+        places = 3
+        self.client.post("/purchase_places", data={ "competition": competition, "club": club, "places": places })
 
     @task
     def board(self):
         self.client.get('/board')
-
-    @task
-    def perf_logout(self):
-        self.client.get("/logout")
