@@ -3,19 +3,19 @@
         {
             "id": 1,
             "name": "Spring Festival",
-            "date": "2020-03-27 10:00:00",
+            "date": "2024-03-27 10:00:00",
             "numberOfPlaces": "25"
         },
         {
             "id": 2,
             "name": "Fall Classic",
-            "date": "2020-10-22 13:30:00",
+            "date": "2024-10-22 13:30:00",
             "numberOfPlaces": "13"
         },
         {
             "id": 3,
-            "name": "Test not enough places",
-            "date": "2100-10-22 13:30:00",
+            "name": "Old Competition",
+            "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "1"
         }
     ]
