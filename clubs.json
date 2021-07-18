@@ -16,5 +16,11 @@
         "name": "She Lifts",
         "email": "kate@shelifts.co.uk",
         "points": "12"
+    },
+    {   
+        "id": 4,
+        "name": "Greedy",
+        "email": "greedy@greed.co.uk",
+        "points": "25"
     }
 ]}

@@ -17,6 +17,13 @@
             "name": "Old Competition",
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "1"
+        },
+        {
+            "id": 4,
+            "name": "Too small competition",
+            "date": "2024-10-22 13:30:00",
+            "numberOfPlaces": "1"
         }
+
     ]
 }
