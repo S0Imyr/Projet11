@@ -1,9 +1,9 @@
-# projet 11
+# Projet 11
 
 
 ### Principe et configuration nécessaire :
 Il s'agit de reprendre en cours un projet en construction et de configurer les tests.
-Le projet a été créé avec Flask et plusieurs bugs ont été détecté et doivent être corrigé.
+Le projet a été créé avec Flask et plusieurs bugs ont été détectés et doivent être corrigés.
 Ce projet nécessite d'installer python.
 
 ## Installation
@@ -49,8 +49,8 @@ Pour obtenir la couverture utiliser les commandes :
 Pour évaluer les performances de l'application, on peut utiliser locust.
 On débutera par lancer l'application sur un terminal puis en laissant l'application tourner :
 
- - en tapant dans un second terminal : `$ locust `
- - puis en se rendant à l'url [http://localhost:8089/](http://localhost:8089/)
+ - taper dans un second terminal : `$ locust `
+ - puis se rendre à l'url [http://localhost:8089/](http://localhost:8089/)
 
  Il faut ensuite renseigner plusieurs champs, on pourra par exemple tester avec :
  - Number of total users to simulate : 100
