@@ -39,10 +39,10 @@ class Test:
 
     @pytest.mark.parametrize("club_id, competition_id, page, messages", 
                              [
-                              (1, 1, "Summary | GUDLFT Registration", ["This competition is over, you can&#39;t book any place."]), 
-                              (3, 3, "Booking for", ["How many places ?"]),
-                              (3, 4, "Summary | GUDLFT Registration", ["Competition or club not found."]), 
-                              (4, 3, "Summary | GUDLFT Registration", ["Competition or club not found."])
+                              (1, 1, "Booking for Spring Festival || GUDLFT", ["How many places ?"]), 
+                              (3, 3, "Summary | GUDLFT Registration", ["This competition is over, you can&#39;t book any place."]),
+                              (3, 15, "Summary | GUDLFT Registration", ["Competition or club not found."]), 
+                              (15, 3, "Summary | GUDLFT Registration", ["Competition or club not found."])
                              ])
     def test_book(self, club_id, competition_id, page, messages):
         response = self.test_client.get(f'/book/{competition_id}/{club_id}', content_type='html/text')
