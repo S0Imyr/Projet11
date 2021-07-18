@@ -1,51 +1,58 @@
-# gudlift-registration
-
-1. Why
+# projet 11
 
 
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
+### Principe et configuration nécessaire :
+Il s'agit de reprendre en cours un projet en construction et de configurer les tests.
+Le projet a été créé avec Flask et plusieurs bugs ont été détecté et doivent être corrigé.
+Ce projet nécessite d'installer python.
 
-2. Getting Started
+## Installation
+### Fichiers du site
+Sur le terminal se placer sur un dossier cible.
 
-    This project uses the following technologies:
-
-    * Python v3.x+
-
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
-     
-
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
-
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
-
-        Before you begin, please ensure you have this installed globally. 
+Puis suivre les étapes suivantes :
+1. Cloner le dépôt ici présent en tapant: `$ git clone https://github.com/S0Imyr/Projet-11.git`
+2. Accéder au dossier ainsi créé avec la commande : `$ cd Projet-11`
+3. Créer un environnement virtuel pour le projet avec 
+    - `$ python -m venv env` sous windows 
+    - ou `$ python3 -m venv env` sous MacOS ou Linux.
+4. Activez l'environnement virtuel avec 
+    - `$ source env/Scripts/activate` sous windows 
+    - ou `$ source env/bin/activate` sous MacOS ou Linux.
+5. Installez les dépendances du projet avec la commande `$ pip install -r requirements.txt`
 
 
-3. Installation
+### Lancement du serveur
+Dans le terminal tapper :
 
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
+6. Définir le fichier python qui lance le serveur avec : `export FLASK_APP=server.py`
+7. Démarrer le serveur avec `$ flask run`
 
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
+Lorsque le serveur fonctionne, après l'étape 7 de la procédure, le site est accessible avec l'url : [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
+## Arrêter le serveur
 
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
+Pour arrêter le serveur aller dans le terminal où il a été lancé, puis appuyer sur les touches Ctrl+C.
 
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
+## Tests et couverture
 
-4. Current Setup
+Pour lancer les test, se placer dans le terminal dans le dossier : projet-11/projet11.
 
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-     
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
+Puis tapper : `$ pytest`.
 
-5. Testing
+Pour obtenir la couverture utiliser les commandes :
+ - `$ coverage run -m pytest`
+ - `$ coverage report`
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
+## Performances
 
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+Pour évaluer les performances de l'application, on peut utiliser locust.
+On débutera par lancer l'application sur un terminal puis en laissant l'application tourner :
 
+ - en tapant dans un second terminal : `$ locust `
+ - puis en se rendant à l'url [http://localhost:8089/](http://localhost:8089/)
+
+ Il faut ensuite renseigner plusieurs champs, on pourra par exemple tester avec :
+ - Number of total users to simulate : 100
+ - Spawn rate : 10
+ - Host : http://127.0.0.1:5000
