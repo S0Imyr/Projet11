@@ -8,7 +8,7 @@ Le projet a été créé avec Flask et plusieurs bugs ont été détectés et do
 Sur le terminal se placer sur un dossier cible.
 
 Puis suivre les étapes suivantes :
-1. Cloner le dépôt ici présent en tapant: `git clone https://github.com/S0Imyr/Projet-11.git`
+1. Cloner le dépôt ici présent en tapant: `git clone https://github.com/rlossec/Tests_debug_python.git`
 2. Accéder au dossier ainsi créé avec la commande : `cd Tests_debug_python/src`
 3. Créer un environnement virtuel pour le projet avec 
     - `python -m venv env` sous windows 
@@ -35,7 +35,7 @@ Pour arrêter le serveur aller dans le terminal où il a été lancé, puis appu
 
 ## Tests et couverture
 
-Pour lancer les test, se placer dans le terminal dans le dossier : projet-11/projet11.
+Pour lancer les test, se placer dans le terminal dans le dossier : `Tests_debug_python\src`.
 
 Puis tapper : `pytest`.
 

@@ -1,5 +1,7 @@
-from src.server import app, load_clubs, load_competitions, MAXIMUM_PLACE_BOOK_IN_COMPETITION
+from src.server import app, load_clubs, load_competitions
 import pytest
+
+from src.views import MAXIMUM_PLACE_BOOK_IN_COMPETITION
 
 
 class Test:
