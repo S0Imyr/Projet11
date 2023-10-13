@@ -2,17 +2,17 @@ import json
 from datetime import datetime, timedelta
 from flask import Flask, render_template, request, redirect, flash,url_for
 
-
+DATA_PATH = 'data/'
 PLACE_COST = 3
 MAXIMUM_PLACE_BOOK_IN_COMPETITION = 12
 
-def load_clubs(file='clubs.json'):
+def load_clubs(file=DATA_PATH+'clubs.json'):
     with open(file) as clubs_file:
         clubs = json.load(clubs_file)['clubs']
         return clubs
 
 
-def load_competitions(file='competitions.json'):
+def load_competitions(file=DATA_PATH+'competitions.json'):
     with open(file) as competitions_file:
         competitions = json.load(competitions_file)['competitions']
         return competitions
@@ -40,9 +40,11 @@ app.secret_key = 'something_special'
 competitions = load_competitions()
 clubs = load_clubs()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/show_summary', methods=['POST'])
 def show_summary():

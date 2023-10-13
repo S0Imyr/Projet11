@@ -1,8 +1,10 @@
 bin
 include
 env
+.venv/
 lib
 .Python
+.idea
 .envrc
 __pycache__
 
